@@ -1,0 +1,449 @@
+﻿<Window x:Class="DZO.Control"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DZO"
+        mc:Ignorable="d"
+        Title="Control"        
+        Height="600" Width="920"
+        WindowStyle="None"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        AllowsTransparency="True">
+    <Window.Resources>
+        <LinearGradientBrush x:Key="buttonStyleGradient"  EndPoint="1,0" StartPoint="0,0">
+            <GradientStop Color="#EA8D8D" Offset="0" />
+            <GradientStop Color="#A890FE" Offset="1" />
+        </LinearGradientBrush>
+        <Style x:Key="buttonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource buttonStyleGradient}" />
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="Button" x:Key="RoundButton">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0,20,0,0" />
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="Button" x:Key="roundeddynamic">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="40" />
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="Button" x:Key="FVBV">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="40" />
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+    <Border Background="{StaticResource Background}"
+            CornerRadius="20">
+        <Grid HorizontalAlignment="Left" Width="920">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="891*"/>
+                <ColumnDefinition Width="29*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Grid.ColumnSpan="2" 
+                    Background="{StaticResource NavBar}"  
+                    CornerRadius="20,20,0,0"
+                    MouseDown="Border_MouseDown"
+                    Cursor="Hand"/>
+            <Grid Width="100" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="820,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="11*"/>
+                    <RowDefinition Height="19*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="33*"/>
+                    <ColumnDefinition Width="26*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="33*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="close"
+                        Style="{DynamicResource RoundButton}"
+                        Grid.Column="3"
+                        Content="X"
+                        FontSize="20"
+                        Background="#e9543f"
+                        BorderThickness="0,0,0,0" ClickMode="Press" Click="Close_onClick"
+                        Cursor="Hand" Grid.RowSpan="2" Height="31" VerticalAlignment="Bottom"/>
+                <Button x:Name="Minimize"
+                        Content="_"
+                        FontSize="20"
+                        Background="#5b5b5b"
+                        BorderThickness="0,0,0,0" Grid.ColumnSpan="2"
+                        Click="Minimize_onClick"
+                        Cursor="Hand" Grid.RowSpan="2" Height="31" VerticalAlignment="Bottom" Grid.Column="1"/>
+
+            </Grid>
+            <Grid 
+                
+                Name="GRID_LOKACIJE"
+                Visibility="Visible"
+                Grid.Row="1" RenderTransformOrigin="0.494,0.505" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition/>
+
+                </Grid.ColumnDefinitions>
+                <Button x:Name="To_Lokacija" Click="To_Lokacija_Click"
+                        Content="&lt;"
+                        FontSize="30"
+                        Style="{DynamicResource FVBV}"
+                        Background="{DynamicResource btn}"
+                        Foreground="{DynamicResource Foreground}"
+                        Margin="14,9,839,496"
+                        BorderThickness="0,0,0,0" Grid.ColumnSpan="2"/>
+                <ComboBox x:Name="lokacije"
+                          Margin="597,80,28,460"
+                          BorderThickness="0"
+                          FontSize="18"
+                          Foreground="Black" 
+                          SelectionChanged="lokacije_SelectionChanged"
+                          RenderTransformOrigin="0.5,0.5" Grid.Column="1"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Name="odLabel"
+                           Grid.Column="1"
+                           HorizontalAlignment="Left"
+                           Text=""
+                           Margin="67,60,0,0"
+                           VerticalAlignment="Top"
+                           Height="78" Width="501"
+                           TextAlignment="center"
+                           Foreground="{DynamicResource Foreground}"
+                           Background="Transparent"
+                           FontSize="25"/>
+                <ScrollViewer Grid.ColumnSpan="2" Margin="2,158,2,88"
+                              Name="Viewer"
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Hidden"/>
+                <Label
+                        Content="Št zaposlenih      Št ostarelih      Št sob"
+                        FontSize="35"
+                        VerticalAlignment="Top"
+                        Foreground="{DynamicResource user}"
+                    Height="58" Grid.Column="1" Margin="113,151,140,0"/>
+                <Button 
+                    Name="change"
+                    Content="CHANGE"
+                    Style="{DynamicResource buttonStyle}"
+                    Margin="729,499,32,21"
+                    BorderThickness="0"
+                    FontSize="20"
+                    Cursor="Hand" 
+                    Click="change_Click" FontWeight="Bold" Grid.Column="1"/>
+            </Grid>
+
+            <Grid x:Name="GRID_CHANGE"
+                  Visibility="Hidden"
+                  Grid.Row="1" RenderTransformOrigin="0.494,0.505"
+                  Grid.ColumnSpan="2">
+                <Button x:Name="back_to_Lokacijee" Click="back_to_Lokacije_Click"
+                        Content="&lt;"
+                        FontSize="30"
+                        Style="{DynamicResource FVBV}"
+                        Background="{DynamicResource btn}"
+                        Foreground="{DynamicResource Foreground}"
+                        Margin="9,4,851,506"
+                        BorderThickness="0,0,0,0" Grid.ColumnSpan="2"/>
+                <Button 
+                    Name="changed"
+                    Content="CHANGE"
+                    Style="{DynamicResource buttonStyle}"
+                    Margin="729,499,32,21"
+                    BorderThickness="0"
+                    FontSize="20"
+                    Cursor="Hand" 
+                    Click="changed_Click" FontWeight="Bold" Grid.Column="1"/>
+                <Grid Margin="0,0,2,86">
+                    <Label Margin="92,28,536,398"
+                           Content="Ime Lokacije"
+                           Foreground="{DynamicResource Foreground}"
+                           FontSize="35"/>
+                    <Label Margin="192,178,432,250"
+                           Content="Število zaposlenih"
+                           Foreground="{DynamicResource Foreground}"
+                           FontSize="35"/>
+                    <Label Margin="192,286,472,146"
+                           Content="Število ostarelih"
+                           Foreground="{DynamicResource Foreground}"
+                           FontSize="35"/>
+                    <Label Margin="192,400,480,28"
+                        Content="Št sob"
+                        Foreground="{DynamicResource Foreground}"
+                        FontSize="35"/>
+                    <TextBox Margin="152,86,32,354"
+                        Background="{DynamicResource Background}"
+                        BorderThickness="0,0,0,1"
+                        Foreground="{DynamicResource user}"
+                        Text=""
+                        FontSize="30"
+                        x:Name="lokacija_ime_text"/>
+                    <TextBox Margin="492,187,230,256"
+                        Background="{DynamicResource Background}"
+                        BorderThickness="0,0,0,1"
+                        Foreground="{DynamicResource user}"
+                        Text=""
+                        FontSize="30"
+                        x:Name="stevilo_zaposlenih"/>
+                    <TextBox Margin="492,309,238,134"
+                        Background="{DynamicResource Background}"
+                        BorderThickness="0,0,0,1"
+                        Foreground="{DynamicResource user}"
+                        Text=""
+                        FontSize="30"
+                        x:Name="stevilo_ostarelih"/>
+                    <TextBox Margin="492,419,224,24"
+                        Background="{DynamicResource Background}"
+                        BorderThickness="0,0,0,1"
+                        Foreground="{DynamicResource user}"
+                        Text=""
+                        FontSize="30"
+                        x:Name="stevilo_sob"/>
+                </Grid>
+
+
+            </Grid>
+
+            <Grid Grid.ColumnSpan="2"
+                  Margin="-1,11,0,-1"
+                  HorizontalAlignment="Left"
+                  Width="918"
+                  Visibility="Hidden"
+                  x:Name="GRID_ZAPOSLENI" Grid.Row="1">
+                <ListView Margin="18,94,402,83"
+                          Name="Zaposleni_list"
+                          Background="{DynamicResource Background}"
+                          Foreground="{DynamicResource Foreground}" SelectionChanged="Zaposleni_list_SelectionChanged"
+                          >
+                    <ListView.View >
+                        <GridView x:Name="GridView_zaposleni">
+                            <GridViewColumn Header="ID" Width="50" x:Name="id" DisplayMemberBinding="{Binding id}" />
+                            <GridViewColumn Header="Ime" Width="80" x:Name="ime" DisplayMemberBinding="{Binding ime}" />
+                            <GridViewColumn Header="Priimek" Width="100" x:Name="priimek" DisplayMemberBinding="{Binding priimek}" />
+                            <GridViewColumn Header="Naziv" Width="150" x:Name="naziv" DisplayMemberBinding="{Binding naziv}" />
+                            <GridViewColumn Header="Telefonska" Width="100" x:Name="telefon" DisplayMemberBinding="{Binding telefon}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="back_lokacija" Click="back_lokacija_Click"
+                        Content="&lt;"
+                        FontSize="30"
+                        Style="{DynamicResource FVBV}"
+                        Background="{DynamicResource btn}"
+                        Foreground="{DynamicResource Foreground}"
+                        Margin="21,15,845,493"
+                        BorderThickness="0,0,0,0"/>
+                <Label x:Name="Zaposleni_Lokacija" Margin="95,-4,2,465"
+                       Foreground="{DynamicResource Foreground}"
+                       FontSize="45"/>
+                <TextBox HorizontalAlignment="Left"
+                         Name="text_ime"
+                         Margin="670,118,0,0" TextWrapping="Wrap"
+                         Text="" VerticalAlignment="Top"
+                         Width="206" Height="36"
+                         FontSize="25"
+                         Background="{DynamicResource Background}"
+                         Foreground="{DynamicResource user}"
+                         BorderThickness="0,0,0,1"/>
+                <TextBox HorizontalAlignment="Left"
+                         Name="text_priimek"
+                         Margin="670,216,0,0" TextWrapping="Wrap"
+                         Text="" VerticalAlignment="Top"
+                         Width="202" Height="36"
+                         FontSize="25"
+                           Background="{DynamicResource Background}"
+                         Foreground="{DynamicResource user}"
+                         BorderThickness="0,0,0,1"/>
+                <TextBox HorizontalAlignment="Left"
+                         Name="text_telefon"
+                         Margin="675,398,0,0" TextWrapping="Wrap"
+                         Text="" VerticalAlignment="Top"
+                         Width="204" Height="36"
+                         FontSize="25"
+                           Background="{DynamicResource Background}"
+                         Foreground="{DynamicResource user}"
+                         BorderThickness="0,0,0,1"/>
+                <Button 
+                    Name="Add_user"
+                    Content="ADD"
+                    Style="{DynamicResource buttonStyle}"
+                    Margin="740,499,22,21"
+                    BorderThickness="0"
+                    FontSize="20"
+                    Cursor="Hand" 
+                    Click="Add_user_Click"  FontWeight="Bold"/>
+                <Button 
+                    Name="edit_user"
+                    Content="EDIT"
+                    Style="{DynamicResource buttonStyle}"
+                    Margin="558,499,202,21"
+                    BorderThickness="0"
+                    FontSize="20"
+                    Cursor="Hand" 
+                    Click="edit_user_Click"  FontWeight="Bold"/>
+                <Button 
+                    Name="Delete_user"
+                    Content="DELETE"
+                    Style="{DynamicResource buttonStyle}"
+                    Margin="378,498,382,21"
+                    BorderThickness="0"
+                    FontSize="20"
+                    Cursor="Hand" 
+                    Click="Delete_user_Click" FontWeight="Bold"/>
+                <Label Content="Ime" HorizontalAlignment="Left" Margin="608,112,0,0" VerticalAlignment="Top"
+                       Foreground="{DynamicResource user}"
+                       FontSize="25"/>
+                <Label Content="Priimek"
+                       Foreground="{DynamicResource user}"
+                       FontSize="25"
+                       HorizontalAlignment="Left" Margin="565,212,0,0" VerticalAlignment="Top"/>
+                <Label Content="Naziv"
+                       Foreground="{DynamicResource user}"
+                       FontSize="25"
+                       HorizontalAlignment="Left" Margin="584,302,0,0" VerticalAlignment="Top"/>
+                <Label Content="Telefonska" 
+                       Foreground="{DynamicResource user}"
+                       FontSize="25"
+                       HorizontalAlignment="Left" Margin="543,394,0,0" VerticalAlignment="Top"/>
+                <ComboBox HorizontalAlignment="Left"
+                           Width="198" Height="36"
+                          Margin="670,306,0,0" VerticalAlignment="Top" 
+                          FontSize="20" SelectionChanged="ComboBox_SelectionChanged"
+                          x:Name="text_naziv"/>
+            </Grid>
+            <Grid Grid.ColumnSpan="2" Margin="0,78,2,2" Grid.Row="1"
+                  x:Name="GRID_OSTARELI"
+                  Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListView Margin="18,13,76,76"
+                          Name="Ostareli_list"
+                          Background="{DynamicResource Background}"
+                          Foreground="{DynamicResource Foreground}" SelectionChanged="Ostareli_list_SelectionChanged" RenderTransformOrigin="0.5,0.5"
+                          >
+                    <ListView.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0.129"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="0.498"/>
+                        </TransformGroup>
+                    </ListView.RenderTransform>
+                    <ListView.View >
+                        <GridView x:Name="Grid_view_ostareli">
+                            <GridViewColumn Header="ID" Width="50" x:Name="id_o" DisplayMemberBinding="{Binding id}" />
+                            <GridViewColumn Header="Ime" Width="80" x:Name="ime_o" DisplayMemberBinding="{Binding ime}" />
+                            <GridViewColumn Header="Priimek" Width="100" x:Name="priimek_o" DisplayMemberBinding="{Binding priimek}" />
+                            <GridViewColumn Header="številka sobe" Width="100" x:Name="soba" DisplayMemberBinding="{Binding st_sobe}" />
+                            <GridViewColumn Header="leto rojstva" Width="80" x:Name="rojstvo" DisplayMemberBinding="{Binding leto}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="back_to_Lokacija" Click="back_to_Lokacija_Click"
+                        Content="&lt;"
+                        FontSize="30"
+                        Style="{DynamicResource FVBV}"
+                        Background="{DynamicResource btn}"
+                        Foreground="{DynamicResource Foreground}"
+                        Margin="13,-69,438,502"
+                        BorderThickness="0,0,0,0"/>
+                <Label x:Name="Ostareli_label" Margin="96,-76,1,503"
+                       Foreground="{DynamicResource Foreground}"
+                       FontSize="45" Grid.ColumnSpan="2"/>
+                <TextBox HorizontalAlignment="Left"
+                         Name="text_ime_o"
+                         Margin="172,58,0,0" TextWrapping="Wrap"
+                         Text="" VerticalAlignment="Top"
+                         Width="206" Height="36"
+                         FontSize="25"
+                         Background="{DynamicResource Background}"
+                         Foreground="{DynamicResource user}"
+                         BorderThickness="0,0,0,1" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left"
+                         Name="text_priimek_o"
+                         Margin="175,144,0,0" TextWrapping="Wrap"
+                         Text="" VerticalAlignment="Top"
+                         Width="202" Height="36"
+                         FontSize="25"
+                           Background="{DynamicResource Background}"
+                         Foreground="{DynamicResource user}"
+                         BorderThickness="0,0,0,1" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left"
+                         Name="text_leto_o"
+                         Margin="180,326,0,0" TextWrapping="Wrap"
+                         Text="" VerticalAlignment="Top"
+                         Width="204" Height="36"
+                         FontSize="25"
+                           Background="{DynamicResource Background}"
+                         Foreground="{DynamicResource user}"
+                         BorderThickness="0,0,0,1" Grid.Column="1"/>
+                <Button 
+                    Name="Add_ostareli"
+                    Content="ADD"
+                    Style="{DynamicResource buttonStyle}"
+                    Margin="240,437,18,8"
+                    BorderThickness="0"
+                    FontSize="20"
+                    Cursor="Hand" 
+                    Click="Add_ostareli_Click"  FontWeight="Bold" Grid.Column="1"/>
+                <Button 
+                    Name="edit_ostareli"
+                    Content="EDIT"
+                    Style="{DynamicResource buttonStyle}"
+                    Margin="62,436,196,8"
+                    BorderThickness="0"
+                    FontSize="20"
+                    Cursor="Hand" 
+                    Click="edit_ostareli_Click"  FontWeight="Bold" Grid.Column="1"/>
+                <Button 
+                    Name="Delete_ostareli"
+                    Content="DELETE"
+                    Style="{DynamicResource buttonStyle}"
+                    Margin="394,436,374,8"
+                    BorderThickness="0"
+                    FontSize="20"
+                    Cursor="Hand" 
+                    Click="Delete_ostareli_Click"  FontWeight="Bold" Grid.ColumnSpan="2"/>
+                <Label Content="Ime" HorizontalAlignment="Left" Margin="110,52,0,0" VerticalAlignment="Top"
+                       Foreground="{DynamicResource user}"
+                       FontSize="25" Grid.Column="1"/>
+                <Label Content="Priimek"
+                       Foreground="{DynamicResource user}"
+                       FontSize="25"
+                       HorizontalAlignment="Left" Margin="70,140,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <Label Content="Številka sobe"
+                       Foreground="{DynamicResource user}"
+                       FontSize="25"
+                       HorizontalAlignment="Left" Margin="16,230,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <Label Content="Leto rojstva" 
+                       Foreground="{DynamicResource user}"
+                       FontSize="25"
+                       HorizontalAlignment="Left" Margin="34,322,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <ComboBox HorizontalAlignment="Left"
+                           Width="198" Height="36"
+                          Margin="175,234,0,0" VerticalAlignment="Top" 
+                          FontSize="20" SelectionChanged="ComboBox_SelectionChanged"
+                          x:Name="text_sobe" Grid.Column="1"/>
+
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="NavBar" Color="gray"/>
+    <SolidColorBrush x:Key="Background" Color="white"/>
+    <SolidColorBrush x:Key="Foreground" Color="black"/>
+    <SolidColorBrush x:Key="user" Color="#5b5b5b"/>
+    <SolidColorBrush x:Key="btn" Color="LightGray"/>
+    <SolidColorBrush x:Key="disabled" Color="black"/>
+</ResourceDictionary>
