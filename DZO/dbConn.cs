@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -88,7 +88,7 @@ namespace DZO
         public void Insert_Lokacija(string kraj, string ime, int zap, int ost, int sob)
         {
             con.Open();
-            string stm = "SELECT insert_location('"+kraj+"','"+ime+"',"+zap+","+ost+","+sob+")";
+            string stm = "SELECT insert_location("+kraj+" , "+ime+" ,"+zap+","+ost+","+sob+")";
             NpgsqlCommand cmd = new NpgsqlCommand(stm, con);
             cmd.ExecuteNonQuery();
             con.Close();
@@ -257,15 +257,13 @@ namespace DZO
             string stm = "SELECT login('" + username + "' , '"+password+"')";
             NpgsqlCommand cmdd = new NpgsqlCommand(stm, con);
             string neki = cmdd.ExecuteScalar().ToString();
-            con.Close();
-            if (neki.Equals("f"))
+            if (neki.Equals("False"))
             {
                 return false;
             }
             else
             {
-                con.Open();
-                string stm2 = "SELECT update_last_login(" + username + ")";
+                string stm2 = "SELECT update_last_login('" + username + "')";
                 NpgsqlCommand cmd = new NpgsqlCommand(stm2, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
