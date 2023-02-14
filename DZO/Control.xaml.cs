@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -379,8 +379,8 @@ namespace DZO
 
         private void Add_ostareli_Click(object sender, RoutedEventArgs e)
         {
-            if(!(text_ime_o.Text.Equals("") || text_priimek_o.Text.Equals("") || text_leto_o.Text.Equals("")))
-            {
+            if(!(text_ime_o.Text.Equals("") || text_priimek_o.Text.Equals("") || text_leto_o.Text.Equals("")||text_sobe.SelectedIndex==null))
+            { 
                 con.InsertOstareli(text_ime_o.Text, text_priimek_o.Text, text_sobe.Text, Convert.ToInt16(text_leto_o.Text), odLabel.Text);
                 Izpis_ostarelih();
                 combostuff();
@@ -407,6 +407,15 @@ namespace DZO
         private void edit_ostareli_Click(object sender, RoutedEventArgs e)
         {
             Ostareli Value = Ostareli_list.SelectedItem as Ostareli;
+            if (text_sobe.SelectedIndex == null)
+            {
+                MessageBox.Show("Prosim izberite sobo");
+            }
+            {
+                con.EditOstareli(text_ime_o.Text, text_priimek_o.Text, text_sobe.Text, Convert.ToInt16(text_leto_o.Text), Value.id);
+                Izpis_ostarelih();
+                combostuff();
+            }
             con.EditOstareli(text_ime_o.Text, text_priimek_o.Text, text_sobe.Text, Convert.ToInt16(text_leto_o.Text), Value.id);
             Izpis_ostarelih();
             combostuff();
